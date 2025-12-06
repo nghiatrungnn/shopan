@@ -106,7 +106,7 @@ function Navbar() {
           />
         </div>
         <div className="quick-keywords">
-          {['RTX 5060', 'RTX 5060 Ti', 'PC GAMING', 'Màn Hình', 'Build PC'].map((keyword) => (
+          {['Mực', 'Khô cá', 'Khô mực', 'Đồ lưu niệm', 'Bánh'].map((keyword) => (
             <span key={keyword} onClick={() => handleKeywordClick(keyword)}>
               {keyword}
             </span>

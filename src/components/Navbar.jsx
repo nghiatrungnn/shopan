@@ -1,4 +1,4 @@
-import { useContext, useRef, useState, useEffect } from 'react';
+import { useContext, useRef, useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaBell, FaShoppingCart, FaBars, FaSearch } from 'react-icons/fa';
 import CategoryDropdown from '../pages/CategoryDropdown';
@@ -10,29 +10,31 @@ function Navbar() {
   const [search, setSearch] = useState('');
   const [cartCount, setCartCount] = useState(0);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const userDropdownRef = useRef(null);
+
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Cập nhật cartCount mỗi khi localStorage thay đổi
-  const updateCartCount = () => {
+  // ✅ useCallback để tránh cảnh báo ESLint
+  const updateCartCount = useCallback(() => {
     const cartKey = user ? `cart_${user.id}` : 'cart_guest';
     const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
     const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
     setCartCount(total);
-  };
+  }, [user]);
 
+  // Cập nhật cartCount mỗi khi mount hoặc user thay đổi
   useEffect(() => {
-    updateCartCount(); // Cập nhật ngay khi mount
+    updateCartCount();
 
-    // Lắng nghe event storage
     const handleStorage = () => updateCartCount();
     window.addEventListener('storage', handleStorage);
 
     return () => window.removeEventListener('storage', handleStorage);
-  }, [user]);
+  }, [updateCartCount]);
 
   // Dropdown Danh Mục
   useEffect(() => {
@@ -69,7 +71,11 @@ function Navbar() {
   return (
     <div className="navbar">
       <div className="logo" onClick={() => navigate('/')}>
-        <img src={process.env.PUBLIC_URL + 'https://scontent.fhan14-5.fna.fbcdn.net/v/t1.15752-9/591774768_1469156347515171_2074211999135365524_n.png?_nc_cat=109&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFAD1tP-qeCRjlEJahCbZWLBSE7RvTTKEEFITtG9NMoQY6GlYZQY2Qt0oTZOLVjvAGlMucFvpt3BQFHSefpRb_8&_nc_ohc=8ZaIgzs9jRsQ7kNvwGM05xa&_nc_oc=AdmLfXuHsvch8SoAcqo3-iWiibQN1V8i6Zd3a2bmG-jAg40u_-M_-J_WChZHe050XNYwUA7agK_sia1rsA-_rZz7&_nc_zt=23&_nc_ht=scontent.fhan14-5.fna&oh=03_Q7cD4AHd78D0THmHMwXYtUMcxPvbmZfu6nRnoGIK92Rhp-zqmw&oe=6957D570'} alt="Logo" className="logo-img" />
+        <img
+          src={process.env.PUBLIC_URL + 'https://scontent.fhan14-5.fna.fbcdn.net/v/t1.15752-9/591774768_1469156347515171_2074211999135365524_n.png?_nc_cat=109&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFAD1tP-qeCRjlEJahCbZWLBSE7RvTTKEEFITtG9NMoQY6GlYZQY2Qt0oTZOLVjvAGlMucFvpt3BQFHSefpRb_8&_nc_ohc=8ZaIgzs9jRsQ7kNvwGM05xa&_nc_oc=AdmLfXuHsvch8SoAcqo3-iWiibQN1V8i6Zd3a2bmG-jAg40u_-M_-J_WChZHe050XNYwUA7agK_sia1rsA-_rZz7&_nc_zt=23&_nc_ht=scontent.fhan14-5.fna&oh=03_Q7cD4AHd78D0THmHMwXYtUMcxPvbmZfu6nRnoGIK92Rhp-zqmw&oe=6957D570'}
+          alt="Logo"
+          className="logo-img"
+        />
         <span className="logo-text"></span>
       </div>
 
@@ -88,11 +94,7 @@ function Navbar() {
 
       <div className="navbar-center">
         <div className="search-box">
-          <FaSearch
-            className="search-icon"
-            onClick={handleSearch}
-            style={{ cursor: 'pointer' }}
-          />
+          <FaSearch className="search-icon" onClick={handleSearch} style={{ cursor: 'pointer' }} />
           <input
             type="text"
             placeholder="Nhập từ khoá cần tìm"
@@ -104,7 +106,7 @@ function Navbar() {
           />
         </div>
         <div className="quick-keywords">
-          {['RTX 5060', 'RTX 5060 Ti', 'PC GAMING', 'Màn Hình', 'Build PC'].map(keyword => (
+          {['RTX 5060', 'RTX 5060 Ti', 'PC GAMING', 'Màn Hình', 'Build PC'].map((keyword) => (
             <span key={keyword} onClick={() => handleKeywordClick(keyword)}>
               {keyword}
             </span>
@@ -132,11 +134,24 @@ function Navbar() {
                   <div className="user-name">{user.name}</div>
                   <div className="user-email">{user.email}</div>
                   {user.role === 'admin' && (
-                    <div className="admin-link" onClick={() => { setShowUserDropdown(false); navigate('/admin/dashboard'); }}>
+                    <div
+                      className="admin-link"
+                      onClick={() => {
+                        setShowUserDropdown(false);
+                        navigate('/admin/dashboard');
+                      }}
+                    >
                       Admin
                     </div>
                   )}
-                  <button onClick={() => { logout(); navigate('/'); }}>Đăng xuất</button>
+                  <button
+                    onClick={() => {
+                      logout();
+                      navigate('/');
+                    }}
+                  >
+                    Đăng xuất
+                  </button>
                 </div>
               )}
             </>
@@ -157,7 +172,9 @@ function Navbar() {
         <div className="nav-item" onClick={() => navigate('/cart')}>
           <FaShoppingCart />
           <span>
-            Giỏ hàng của bạn<br />({cartCount}) sản phẩm
+            Giỏ hàng của bạn
+            <br />
+            ({cartCount}) sản phẩm
           </span>
         </div>
       </div>

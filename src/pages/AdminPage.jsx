@@ -25,7 +25,7 @@ function AdminPage() {
 
   // ✅ Kiểm tra role người dùng
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const userInfo = JSON.parse(localStorage.getItem('user'));
     if (!userInfo || userInfo.role !== 'admin') {
       toast.error('❌ Bạn không có quyền truy cập trang này!');
       navigate('/login');

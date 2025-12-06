@@ -11,7 +11,7 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/auth/register', form);
+      await axios.post('/auth/users/register', form);
       alert('Đăng ký thành công! Mời bạn đăng nhập.');
       navigate('/login');
     } catch (err) {

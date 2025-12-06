@@ -17,8 +17,7 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/auth/login', { email, password });
-
+      const res = await axios.post('/auth/users/login', { email, password });
       const { user, token } = res.data; // ✅ Backend trả về user + token
 
       // ✅ Lưu thông tin vào localStorage để axios interceptor dùng

@@ -291,14 +291,14 @@ function HomePage() {
       ====================== */}
       <div className="homepage-container" ref={productSectionRef}>
         <div className="homepage-header">
-          <h1 className="homepage-title">Các sản phẩm máy tính</h1>
+          <h1 className="homepage-title">Mặt hàng nổi bật</h1>
           <button className="toggle-view-btn" onClick={toggleShowAll}>
             {showAll ? 'Thu gọn ▲' : 'Xem tất cả ▼'}
           </button>
         </div>
 
         <div className="product-list">
-          {(showAll ? allProducts : allProducts.slice(0, 8)).map(p => (
+          {(showAll ? allProducts : allProducts.slice(0, 10)).map(p => (
             <div key={p._id} className="product-card">
               <Link to={`/product/${p._id}`} className="product-link">
                 <div className="product-image-box">

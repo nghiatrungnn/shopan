@@ -138,7 +138,7 @@ function Navbar() {
                       className="admin-link"
                       onClick={() => {
                         setShowUserDropdown(false);
-                        navigate('/admin/dashboard');
+                        navigate('/admin');
                       }}
                     >
                       Admin

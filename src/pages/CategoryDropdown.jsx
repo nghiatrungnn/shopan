@@ -14,7 +14,7 @@ function CategoryDropdown() {
     { icon: <FaDesktop />, name: 'Khô bò' },
     { icon: <FaRegImages />, name: 'Khô cá' },
     { icon: <FaMicrochip />, name: 'Bánh' },
-    { icon: <FaPlug />, name: 'Di sản văn hóa' },
+    { icon: <FaPlug />, name: 'Đồ lưu niệm' },
   ];
 
   const handleCategoryClick = (categoryName) => {

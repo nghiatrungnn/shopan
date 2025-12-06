@@ -1,26 +1,29 @@
+/* ==============================
+   CATEGORY DROPDOWN
+   ============================== */
 .category-dropdown {
   position: absolute;
   top: 60px;
-  left: 32px;
+  left: 0; /* gắn sát nút danh mục */
   width: 280px;
   background-color: #fff;
   border: 1px solid #e0e0e0;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
   border-radius: 10px;
-  padding: 12px 0;
+  padding: 0; /* bỏ padding thừa */
   font-family: 'Segoe UI', sans-serif;
-  animation: fadeIn 0.2s ease-in-out;
+  z-index: 1000;
+  animation: fadeIn 0.25s ease-in-out;
 }
 
 .category-item {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  gap: 12px;
+  padding: 12px 20px; /* mỗi item có padding */
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease;
-  gap: 14px;
   border-radius: 6px;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .category-item:hover {
@@ -31,12 +34,17 @@
 .category-icon {
   font-size: 20px;
   color: #333;
+  transition: color 0.2s ease;
+}
+
+.category-item:hover .category-icon {
+  color: #1976d2;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-5px);
+    transform: translateY(-6px);
   }
   to {
     opacity: 1;

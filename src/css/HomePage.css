@@ -195,7 +195,7 @@ img {
 
 .view-all-link,
 .toggle-view-btn {
-  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  background: linear-gradient(90deg, #1c20f6, #1d36f4);
   color: #fff;
   border: none;
   padding: 8px 16px;
@@ -307,7 +307,7 @@ img {
   width: 100%;
   border: none;
   border-radius: 8px;
-  background: #1976d2;
+  background: #c81313;
   color: #fff;
   cursor: pointer;
   font-size: 14px;
@@ -315,7 +315,7 @@ img {
 }
 
 .add-to-cart-btn:hover {
-  background: #0d47a1;
+  background: #d32f2f;
 }
 
 /* --- CAROUSEL BUTTON --- */
@@ -340,6 +340,16 @@ img {
   background-color: rgba(0,0,0,0.2);
   transform: scale(1.1);
 }
+/* nút đã thêm vào giỏ */
+.add-to-cart-btn.added {
+  background: #ff0000; /* đỏ rực khi đã thêm */
+  cursor: default;
+}
+
+.add-to-cart-btn.added:hover {
+  background: #ff0000; /* giữ màu đỏ rực khi hover */
+}
+
 
 /* --- ANIMATION --- */
 @keyframes fadeInUp {

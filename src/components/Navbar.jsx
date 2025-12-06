@@ -120,7 +120,7 @@ function Navbar() {
               <span
                 onClick={() => {
                   setShowUserDropdown(false);
-                  navigate('/user');
+                  navigate('');
                 }}
                 style={{ cursor: 'pointer', fontWeight: 'bold' }}
               >

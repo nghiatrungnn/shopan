@@ -1,203 +1,209 @@
 /* 🎯 CART PAGE CONTAINER */
 .cart-page {
-  max-width: 700px;
+  max-width: 780px;
   margin: 40px auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
+  padding: 24px;
+  background: #fff;
+  border-radius: 16px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.07);
 }
 
-/* 🛍️ TITLE */
-.cart-page h1 {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #1e293b;
-  text-align: center;
-  border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 10px;
-}
-
-/* 📦 CART ITEMS */
-.cart-items {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
+/* 📦 CART ITEM – 4 CỘT CHUẨN */
 .cart-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 90px 1fr 120px 90px;
   align-items: center;
-  gap: 14px;
-  border-radius: 10px;
-  padding: 12px 14px;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 14px;
   background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-  transition: transform 0.2s ease;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
 }
 
 .cart-item:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 
-/* 🖼️ PRODUCT IMAGE */
+/* 🖼 IMAGE — luôn đồng đều */
 .cart-item img {
-  width: 65px;
-  height: 65px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  background: #f3f4f6;
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 10px;
+  padding: 6px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
 }
 
-/* 📋 PRODUCT INFO */
+/* 📝 PRODUCT INFO — fix chiều cao */
 .cart-info {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-height: 70px;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .cart-info h3 {
   font-size: 1rem;
-  color: #111827;
   margin: 0;
   font-weight: 600;
+  line-height: 1.3;
+  margin-top: 50px;
 }
 
 .cart-info p {
-  font-size: 0.92rem;
-  color: #64748b;
   margin: 0;
+  font-size: 0.85rem;
+  color: #64748b;
 }
 
 .cart-info .price {
-  font-weight: 600;
+  text-align: left;
+  margin-left: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: #2563eb;
-  font-size: 1rem;
 }
 
-/* 🔢 QUANTITY CONTROLS */
+/* 🔢 QUANTITY — luôn nằm giữa cột */
 .quantity-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 6px;
+  justify-content: flex-start;
+  margin-left: 400px;   /* 👈 chỉnh số này */
+  gap: 10px;
+  transform: translateY(-50px);
 }
 
 .quantity-controls button {
-  width: 26px;
-  height: 26px;
-  background: #e0f2fe;
+  width: 32px;
+  height: 32px;
   border: 1px solid #93c5fd;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #1e3a8a;
+  background: #e0f2fe;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition: 0.2s;
 }
 
 .quantity-controls button:hover {
   background: #bfdbfe;
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .quantity-controls span {
-  font-size: 1rem;
-  font-weight: 500;
-  min-width: 22px;
+  width: 28px;
   text-align: center;
-  color: #1e293b;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-/* ❌ REMOVE BUTTON */
+/* ❌ REMOVE — kích thước cố định, thẳng hàng */
 .remove-btn {
+  width: 80px;
+  text-align: center;
   background: #ef4444;
   color: #fff;
+  padding: 8px 0;
+  border-radius: 8px;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
-  padding: 6px 10px;
-  display: flex;
-  align-items: center;
-  transition: all 0.2s ease;
+  font-weight: 500;
+  transition: 0.2s;
+  margin-left: 417px;
+  transform: translateY(-50px);
 }
 
 .remove-btn:hover {
   background: #dc2626;
   transform: scale(1.05);
 }
-
-/* 💰 CART SUMMARY */
+/* 🛒 TỔNG TIỀN + NÚT THANH TOÁN */
 .cart-summary {
-  margin-top: 25px;
-  padding: 16px 20px;
-  border-radius: 10px;
-  background: #f1f5f9;
-  text-align: right;
+  margin-top: 30px;
+  padding: 20px 24px;
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.02);
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.cart-summary h2 {
+.cart-summary .total-label {
   font-size: 1.1rem;
-  color: #111827;
   font-weight: 600;
-  margin-bottom: 10px;
+  color: #334155;
 }
 
-.cart-summary button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  background: #2563eb;
+.cart-summary .total-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+/* 🔥 BUTTON THANH TOÁN – đẹp chuẩn website thương mại điện tử */
+.checkout-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  transition: background 0.25s, transform 0.1s;
-}
-
-.cart-summary button:hover {
-  background: #1d4ed8;
-  transform: translateY(-2px);
-}
-
-/* 💤 EMPTY CART */
-.cart-page p {
-  font-size: 1rem;
   text-align: center;
-  color: #9ca3af;
-  margin-top: 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(37,99,235,0.25);
+  transition: 0.25s ease;
 }
+
+.checkout-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(29,78,216,0.32);
+}
+
+.checkout-btn:active {
+  transform: scale(0.98);
+}
+
 
 /* 📱 RESPONSIVE */
 @media (max-width: 700px) {
-  .cart-page {
-    max-width: 95vw;
-    padding: 10px;
-  }
-
   .cart-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "img info"
+      "qty remove";
   }
 
   .cart-item img {
+    grid-area: img;
     width: 100%;
     height: 150px;
-    object-fit: contain;
   }
 
-  .cart-summary {
-    text-align: center;
+  .cart-info {
+    grid-area: info;
+  }
+
+  .quantity-controls {
+    grid-area: qty;
+    justify-content: flex-start;
+  }
+
+  .remove-btn {
+    grid-area: remove;
+    justify-self: end;
   }
 }

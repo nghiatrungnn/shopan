@@ -8,6 +8,7 @@ import { AuthContext } from '../context/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function CartPage() {
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
@@ -59,25 +60,6 @@ function CartPage() {
   window.dispatchEvent(new Event('storage'));
 };
 
-
-  const addToCart = (product) => {
-    const cartKey = user ? getCartKey(user.id) : 'cart_guest';
-    const storedCart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
-    const existIndex = storedCart.findIndex(item => item._id === product._id);
-    if (existIndex > -1) {
-      storedCart[existIndex].quantity += 1;
-    } else {
-      storedCart.push({ ...product, quantity: 1 });
-    }
-
-    saveCart(storedCart);
-    toast.success('✅ Thêm sản phẩm vào giỏ hàng thành công', {
-      position: 'top-center',
-      autoClose: 1500,
-    });
-  };
-
   const updateQuantity = (id, amount) => {
     const updatedCart = cart.map(item => {
       if (item._id === id) {
@@ -121,7 +103,7 @@ function CartPage() {
                 <img src={item.image} alt={item.name} />
                 <div className="cart-info">
                   <h3>{item.name}</h3>
-                  <p>Hãng: {item.brand}</p>
+                  <p>{item.brand}</p>
                   <p className="price">{Number(item.price).toLocaleString()} VND</p>
                   <div className="cart-actions">
                     <div className="quantity-controls">
@@ -143,7 +125,10 @@ function CartPage() {
 
             <div className="cart-summary">
               <h2>Tổng cộng: {totalPrice.toLocaleString()} VND</h2>
-              <button onClick={handleCheckout}>Thanh toán</button>
+              <button className="checkout-btn" onClick={handleCheckout}>
+  Thanh toán
+</button>
+
             </div>
           </div>
         )}

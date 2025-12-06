@@ -1,20 +1,31 @@
+/* ==============================
+   NAVBAR - PREMIUM MODERN UI
+   ============================== */
+
+/* --- GLOBAL NAVBAR --- */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #ffffff;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 32px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   font-family: 'Segoe UI', sans-serif;
+  transition: box-shadow 0.3s ease;
 }
 
+.navbar:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* --- LOGO --- */
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -24,8 +35,8 @@
 }
 
 .logo-img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -36,7 +47,7 @@
   color: #1976d2;
 }
 
-/* Danh mục */
+/* --- CATEGORY BUTTON --- */
 .category-wrapper {
   position: relative;
 }
@@ -44,6 +55,7 @@
 .category-btn {
   display: flex;
   align-items: center;
+  gap: 6px;
   background-color: #1976d2;
   color: #fff;
   border: none;
@@ -51,31 +63,29 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   margin-left: 20px;
 }
 
 .category-btn:hover {
   background-color: #155aaf;
-}
-
-.category-btn .icon {
-  margin-right: 6px;
+  transform: scale(1.03);
 }
 
 .category-dropdown {
   position: absolute;
-  top: 100%;
+  top: 110%;
   left: 0;
-  background: white;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
   padding: 12px;
   z-index: 999;
   min-width: 240px;
+  transition: opacity 0.3s ease;
 }
 
-/* Navbar center */
+/* --- SEARCH BOX CENTER --- */
 .navbar-center {
   flex: 1;
   margin: 0 40px;
@@ -88,43 +98,46 @@
   border-radius: 6px;
   padding: 6px 12px;
   background-color: #fafafa;
-  transition: border-color 0.3s ease;
-  height: 38px; /* đảm bảo chiều cao đều */
+  height: 38px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .search-box:hover {
   border-color: #1976d2;
+  box-shadow: 0 2px 6px rgba(25, 118, 210, 0.2);
 }
 
 .search-icon {
   color: #888;
   font-size: 16px;
-  transition: color 0.3s, transform 0.2s;
   cursor: pointer;
-  margin-right: 40px; /* cách input một chút */
+  margin-right: 8px;
+  transition: color 0.3s, transform 0.2s ease;
 }
 
 .search-box:hover .search-icon {
   color: #1976d2;
+  transform: scale(1.1);
 }
 
 .search-box input {
+  flex: 1;
   border: none;
   outline: none;
-  flex: 1;
   background: transparent;
   font-size: 14px;
-  height: 100%;       /* đảm bảo full chiều cao */
-  padding: 0;         /* xóa padding mặc định */
-  margin: 0;          /* xóa margin mặc định */
-  line-height: 1;     /* thẳng hàng tốt hơn */
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  line-height: 1.2;
 }
 
+/* --- QUICK KEYWORDS --- */
 .quick-keywords {
   margin-top: 6px;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   font-size: 13px;
 }
 
@@ -134,14 +147,14 @@
   padding: 4px 6px;
   background: #f1f7ff;
   border-radius: 4px;
-  transition: background 0.2s;
+  transition: background 0.2s ease;
 }
 
 .quick-keywords span:hover {
   background: #e3f0ff;
 }
 
-/* Navbar right */
+/* --- NAVBAR RIGHT --- */
 .navbar-right {
   display: flex;
   align-items: center;
@@ -156,35 +169,35 @@
   position: relative;
   color: #333;
   font-size: 14px;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
 .nav-item:hover {
   color: #1976d2;
 }
 
-/* Icon hover effect */
-.nav-item svg,
-.search-icon {
+.nav-item svg {
   transition: color 0.3s, transform 0.2s ease;
 }
 
 .nav-item:hover svg {
   color: #1976d2;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
+/* --- USER DROPDOWN --- */
 .user-dropdown {
   position: absolute;
   top: 110%;
   right: 0;
-  background: #fff;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 16px;
   min-width: 220px;
   z-index: 9999;
   font-size: 14px;
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .user-name {
@@ -207,7 +220,7 @@
 .user-dropdown button {
   background-color: #f44336;
   border: none;
-  color: white;
+  color: #fff;
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;

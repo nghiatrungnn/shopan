@@ -9,8 +9,8 @@
   background-color: #fff;
   border: 1px solid #e0e0e0;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 0; /* bỏ padding thừa */
+  border-radius: 12px;
+  padding: 0;
   font-family: 'Segoe UI', sans-serif;
   z-index: 1000;
   animation: fadeIn 0.25s ease-in-out;
@@ -20,25 +20,31 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 20px; /* mỗi item có padding */
+  padding: 12px 20px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .category-item:hover {
   background-color: #f0f0f0;
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
-.category-icon {
-  font-size: 20px;
+.category-icon img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.category-item:hover .category-icon img {
+  transform: scale(1.2);
+}
+
+.category-name {
+  font-size: 15px;
+  font-weight: 500;
   color: #333;
-  transition: color 0.2s ease;
-}
-
-.category-item:hover .category-icon {
-  color: #1976d2;
 }
 
 @keyframes fadeIn {

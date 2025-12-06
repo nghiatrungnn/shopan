@@ -45,53 +45,31 @@ function CheckoutPage() {
   const handleSubmit = (e) => {
     if (e?.preventDefault) e.preventDefault();
 
-    // Map tên field sang tiếng Việt
-    const fieldNames = {
-      name: "Họ tên",
-      email: "Email",
-      phone: "Số điện thoại",
-      province: "Tỉnh/Thành phố",
-      address: "Địa chỉ"
-    };
-
-    // Kiểm tra các trường bắt buộc
+    const fieldNames = { name: "Họ tên", email: "Email", phone: "Số điện thoại", province: "Tỉnh/Thành phố", address: "Địa chỉ" };
     const requiredFields = ["name", "email", "phone", "province", "address"];
     for (let field of requiredFields) {
       if (!form[field]?.trim()) {
-        toast.error(`Vui lòng điền ${fieldNames[field]}!`, {
-          position: "top-right",
-          autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Vui lòng điền ${fieldNames[field]}!`, { position: "top-right", autoClose: 2500 });
         return;
       }
     }
 
     if (cart.length === 0) {
-      toast.warning("Giỏ hàng đang trống, không thể thanh toán!", {
-        position: "top-right",
-        autoClose: 2500
-      });
+      toast.warning("Giỏ hàng đang trống, không thể thanh toán!", { position: "top-right", autoClose: 2500 });
       return;
     }
 
-    // Xóa giỏ hàng
     const cartKey = user ? `cart_${user.id}` : 'cart_guest';
     localStorage.removeItem(cartKey);
     setCart([]);
     window.dispatchEvent(new Event("storage"));
 
-    // Hiện modal
     setShowModal(true);
 
-    // Tự ẩn modal sau 2s và quay về trang chủ
     setTimeout(() => {
       setShowModal(false);
       navigate('/');
-    }, 2000);
+    }, 2500);
   };
 
   return (
@@ -100,35 +78,29 @@ function CheckoutPage() {
       <div className="checkout-page">
         <h2>Thông tin thanh toán</h2>
 
-        <div style={{ marginBottom: 24, background: "#f7f7fa", borderRadius: 8, padding: 16 }}>
-          <h3 style={{ marginBottom: 12 }}>Sản phẩm trong đơn hàng</h3>
+        <div className="checkout-cart-summary">
+          <h3>Sản phẩm trong đơn hàng</h3>
           {cart.length === 0 ? <p>Không có sản phẩm nào trong giỏ hàng.</p> : (
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <ul className="checkout-cart-list">
               {cart.map(item => (
-                <li key={item._id} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
-                  <img src={item.image} alt={item.name} style={{ width: 48, height: 48, objectFit: "cover", borderRadius: 6 }} />
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 500 }}>{item.name}</div>
-                    <div style={{ fontSize: "0.9rem", color: "#666" }}>x{item.quantity}</div>
+                <li key={item._id} className="checkout-cart-item">
+                  <img src={item.image} alt={item.name} />
+                  <div className="checkout-cart-info">
+                    <div className="checkout-cart-name">{item.name}</div>
+                    <div className="checkout-cart-quantity">x{item.quantity}</div>
                   </div>
-                  <div style={{ fontWeight: 600, color: "#2d6a4f" }}>
-                    {(item.price * item.quantity).toLocaleString()} VND
-                  </div>
+                  <div className="checkout-cart-price">{(item.price * item.quantity).toLocaleString()} VND</div>
                 </li>
               ))}
             </ul>
           )}
-          <div style={{ borderTop: "1px solid #e0e0e0", marginTop: 12, paddingTop: 10, textAlign: "right" }}>
-            <div style={{ fontSize: "1rem", marginBottom: 4 }}>
-              Tổng tạm tính: <b>{total.toLocaleString()} VND</b>
-            </div>
-            <div style={{ fontSize: "1.08rem", fontWeight: 600, color: "#1976d2" }}>
-              Thành tiền: {total.toLocaleString()} VND
-            </div>
+          <div className="checkout-cart-total">
+            <div>Tổng tạm tính: <b>{total.toLocaleString()} VND</b></div>
+            <div className="checkout-cart-final">Thành tiền: {total.toLocaleString()} VND</div>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="checkout-form">
           <input name="name" placeholder="Họ tên" value={form.name} onChange={handleChange} />
           <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} />
           <input name="phone" type="tel" placeholder="Số điện thoại" value={form.phone} onChange={handleChange} />
@@ -138,19 +110,16 @@ function CheckoutPage() {
           </select>
           <input name="address" placeholder="Địa chỉ" value={form.address} onChange={handleChange} />
           <textarea name="note" placeholder="Ghi chú (tuỳ chọn)" value={form.note} onChange={handleChange} rows={3} />
-
-          <button type="button" className="checkout-submit-btn" onClick={handleSubmit}>
-            Đặt hàng
-          </button>
+          <button type="button" className="checkout-submit-btn" onClick={handleSubmit}>Đặt hàng</button>
         </form>
       </div>
 
-      {/* Modal thanh toán */}
+      {/* Modal đặt hàng thành công */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h3>🎉 Thanh toán thành công!</h3>
-            <p>Giỏ hàng đã được làm mới.</p>
+            <h3>🎉 Đặt hàng thành công!</h3>
+            <p>Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đã được ghi nhận.</p>
             <button className="close-modal" onClick={() => { setShowModal(false); navigate('/'); }}>
               Đóng
             </button>
